@@ -101,4 +101,14 @@ export const recentMyActivity = [
     item: "Changed email address",
     time: "3 days ago",
   },
+  {
+    action: "Deleted task",
+    item: "Old marketing campaign",
+    time: "1 week ago",
+  },
+  {
+    action: "Deleted task",
+    item: "Old marketing campaign",
+    time: "1 week ago",
+  },
 ];

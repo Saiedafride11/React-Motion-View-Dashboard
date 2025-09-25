@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { sidebarNavigation } from "../../fake_data";
+import logoImage from "../assets/motion-logo.png";
 import { logout } from "../store/slices/authSlice";
 import RoleGuard from "./RoleGuard";
 
@@ -22,7 +23,8 @@ const Layout = ({ children }) => {
         <div className="w-64 bg-gray-800 border-r border-gray-700">
           <div className="flex flex-col h-screen">
             <div className="p-6 pe-0">
-              <h1 className="text-xl font-semibold text-white">
+              <img src={logoImage} alt="logo" className="w-20" />
+              <h1 className="text-xl font-semibold text-white mt-2">
                 Motion View Dashboard
               </h1>
               <p className="text-xs text-gray-400 mt-1 capitalize">
