@@ -5,8 +5,30 @@ export const sidebarNavigation = [
     icon: "📊",
     roles: ["admin", "user"],
   },
-  { name: "Users", href: "/users", icon: "👥", roles: ["admin"] },
-  { name: "Profile", href: "/profile", icon: "👤", roles: ["admin", "user"] },
+  {
+    name: "Users",
+    href: "/users",
+    icon: "👥",
+    roles: ["admin"],
+  },
+  {
+    name: "Profile",
+    href: "/profile",
+    icon: "👤",
+    roles: ["admin", "user"],
+  },
+  {
+    name: "Projects",
+    href: "/projects",
+    icon: "📁",
+    roles: ["admin", "user"],
+  },
+  {
+    name: "Settings",
+    href: "/settings",
+    icon: "⚙️",
+    roles: ["admin"],
+  },
 ];
 
 export const mockUsersList = [

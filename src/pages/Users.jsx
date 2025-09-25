@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import DeleteConfirmModal from "../components/DeleteConfirmModal";
 import Modal from "../components/Modal";
@@ -39,8 +40,10 @@ const Users = () => {
   const handleCreateUser = async (userData) => {
     try {
       await createUser(userData).unwrap();
+      toast.success("User created successfully!");
       setIsCreateModalOpen(false);
     } catch (error) {
+      toast.error("Failed to create user");
       console.error("Failed to create user:", error);
     }
   };
@@ -48,9 +51,11 @@ const Users = () => {
   const handleUpdateUser = async (userData) => {
     try {
       await updateUser({ id: selectedUser.id, ...userData }).unwrap();
+      toast.success("User updated successfully!");
       setIsEditModalOpen(false);
       setSelectedUser(null);
     } catch (error) {
+      toast.error("Failed to update user");
       console.error("Failed to update user:", error);
     }
   };
@@ -58,9 +63,11 @@ const Users = () => {
   const handleDeleteUser = async () => {
     try {
       await deleteUser(selectedUser.id).unwrap();
+      toast.success("User deleted successfully!");
       setIsDeleteModalOpen(false);
       setSelectedUser(null);
     } catch (error) {
+      toast.error("Failed to delete user");
       console.error("Failed to delete user:", error);
     }
   };

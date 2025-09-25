@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
   useChangePasswordMutation,
@@ -27,11 +28,9 @@ const Profile = () => {
     useUpdateProfileMutation();
   const [changePassword, { isLoading: isChangingPassword }] =
     useChangePasswordMutation();
-  const [messages, setMessages] = useState({ success: "", error: "" });
 
   const handleProfileSubmit = async (e) => {
     e.preventDefault();
-    setMessages({ success: "", error: "" });
 
     try {
       const result = await updateProfile(profileData).unwrap();
@@ -44,29 +43,22 @@ const Profile = () => {
         })
       );
 
-      setMessages({ success: "Profile updated successfully!", error: "" });
+      toast.success("Profile updated successfully!");
     } catch (error) {
-      setMessages({
-        success: "",
-        error: error.data?.message || "Failed to update profile",
-      });
+      toast.error(`${error.data?.message || "Failed to update profile"}`);
     }
   };
 
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
-    setMessages({ success: "", error: "" });
 
     if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setMessages({ success: "", error: "New passwords do not match" });
+      toast.error("New passwords do not match");
       return;
     }
 
     if (passwordData.newPassword.length < 6) {
-      setMessages({
-        success: "",
-        error: "New password must be at least 6 characters long",
-      });
+      toast.error("New password must be at least 6 characters long");
       return;
     }
 
@@ -82,12 +74,9 @@ const Profile = () => {
         confirmPassword: "",
       });
 
-      setMessages({ success: "Password changed successfully!", error: "" });
+      toast.success("Password changed successfully!");
     } catch (error) {
-      setMessages({
-        success: "",
-        error: error.data?.message || "Failed to change password",
-      });
+      toast.error(`${error.data?.message || "Failed to change password"}`);
     }
   };
 
@@ -141,21 +130,6 @@ const Profile = () => {
           </button>
         </nav>
       </div>
-
-      {/* Messages */}
-      {messages.success && (
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-          <p className="text-green-800 dark:text-green-400">
-            {messages.success}
-          </p>
-        </div>
-      )}
-
-      {messages.error && (
-        <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-4">
-          <p className="text-destructive">{messages.error}</p>
-        </div>
-      )}
 
       {/* Profile Information Tab */}
       {activeTab === "profile" && (
